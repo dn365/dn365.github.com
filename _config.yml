@@ -2,10 +2,10 @@
 #      Main Configs       #
 # ----------------------- #
 
-url: http://yoursite.com
-title: My Octopress Blog
+url: http://dn365.github.com
+title: My git Blog
 subtitle: A blogging framework for hackers.
-author: Your Name
+author: dn365
 simple_search: http://google.com/search
 description:
 
