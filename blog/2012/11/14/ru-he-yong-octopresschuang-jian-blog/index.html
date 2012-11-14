@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Ruby fans 遥望远方</title>
+  <title>如何用Octopress创建blog - Ruby fans 遥望远方</title>
   <meta name="author" content="dn365">
 
   
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://dn365.github.com/">
+  <link rel="canonical" href="http://dn365.github.com/blog/2012/11/14/ru-he-yong-octopresschuang-jian-blog/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -63,15 +63,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2012/11/14/ru-he-yong-octopresschuang-jian-blog/">如何用Octopress创建blog</a></h1>
+      <h1 class="entry-title">如何用Octopress创建blog</h1>
     
     
       <p class="meta">
@@ -89,14 +86,14 @@
 
 <time datetime="2012-11-14T16:21:00+08:00" pubdate data-updated="true">Nov 14<span>th</span>, 2012</time>
         
-         | <a href="/blog/2012/11/14/ru-he-yong-octopresschuang-jian-blog/#disqus_thread">Comments</a>
+         | <a href="#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><h2>Install Octopress</h2>
+<div class="entry-content"><h2>Install Octopress</h2>
 
 <h3>install rvm</h3>
 
@@ -170,22 +167,16 @@ blog的配置信息修改: <code>_config.yml</code></p>
 
 <h6>先写到这里，下次接着 <code>如何通过github建自己的blog站</code> &#8230;</h6>
 </div>
-  
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/11/14/ge-ren-bo-ke-zheng-shi-zhuan-yong-octopress/">个人博客正式转用 Octopress</a></h1>
-    
-    
-      <p class="meta">
-        
+  
+
+<span class="byline author vcard">Posted by <span class="fn">dn365</span></span>
+
+      
 
 
 
@@ -197,30 +188,38 @@ blog的配置信息修改: <code>_config.yml</code></p>
   
 
 
-<time datetime="2012-11-14T14:50:00+08:00" pubdate data-updated="true">Nov 14<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/11/14/ge-ren-bo-ke-zheng-shi-zhuan-yong-octopress/#disqus_thread">Comments</a>
-        
-      </p>
+<time datetime="2012-11-14T16:21:00+08:00" pubdate data-updated="true">Nov 14<span>th</span>, 2012</time>
+      
+
+
+    </p>
     
-  </header>
-
-
-  <div class="entry-content"><p>折腾了好几天，vps系统重装，之前的 wordpress blog 数据丢的一个不剩，心痛 &#8230;
-开始重新折腾，作为Rubyfans 放弃wordpress 用ruby方式写blog 从现在开始 用Octopress &#8230;</p>
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://dn365.github.com/blog/2012/11/14/ru-he-yong-octopresschuang-jian-blog/" data-via="" data-counturl="http://dn365.github.com/blog/2012/11/14/ru-he-yong-octopresschuang-jian-blog/" >Tweet</a>
+  
+  
+  
 </div>
-  
-  
 
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/11/14/ge-ren-bo-ke-zheng-shi-zhuan-yong-octopress/" title="Previous Post: 个人博客正式转用 Octopress">&laquo; 个人博客正式转用 Octopress</a>
+      
+      
+    </p>
+  </footer>
+</article>
 
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
+  </section>
+
+</div>
+
 <aside class="sidebar">
   
     <section>
@@ -246,6 +245,7 @@ blog的配置信息修改: <code>_config.yml</code></p>
   
 </aside>
 
+
     </div>
   </div>
   <footer role="contentinfo"><p>
@@ -260,7 +260,10 @@ blog的配置信息修改: <code>_config.yml</code></p>
       var disqus_shortname = 'dn365-blog';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://dn365.github.com/blog/2012/11/14/ru-he-yong-octopresschuang-jian-blog/';
+        var disqus_url = 'http://dn365.github.com/blog/2012/11/14/ru-he-yong-octopresschuang-jian-blog/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

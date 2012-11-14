@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[My git Blog]]></title>
+  <title><![CDATA[Ruby fans 遥望远方]]></title>
   <link href="http://dn365.github.com/atom.xml" rel="self"/>
   <link href="http://dn365.github.com/"/>
-  <updated>2012-11-14T11:55:48+08:00</updated>
+  <updated>2012-11-14T16:29:44+08:00</updated>
   <id>http://dn365.github.com/</id>
   <author>
     <name><![CDATA[dn365]]></name>
@@ -14,11 +14,93 @@
 
   
   <entry>
-    <title type="html"><![CDATA[hello world]]></title>
-    <link href="http://dn365.github.com/blog/2012/11/14/hello-world/"/>
-    <updated>2012-11-14T10:16:00+08:00</updated>
-    <id>http://dn365.github.com/blog/2012/11/14/hello-world</id>
-    <content type="html"><![CDATA[<p>Hello World ! Test &#8230;</p>
+    <title type="html"><![CDATA[如何用Octopress创建blog]]></title>
+    <link href="http://dn365.github.com/blog/2012/11/14/ru-he-yong-octopresschuang-jian-blog/"/>
+    <updated>2012-11-14T16:21:00+08:00</updated>
+    <id>http://dn365.github.com/blog/2012/11/14/ru-he-yong-octopresschuang-jian-blog</id>
+    <content type="html"><![CDATA[<h2>Install Octopress</h2>
+
+<h3>install rvm</h3>
+
+<p>先安装rvm环境</p>
+
+<pre><code>`bash &lt; &lt;(curl -s https://rvm.beginrescueend.com/install/rvm)`
+</code></pre>
+
+<p>將 rvm 指令变成 shell function</p>
+
+<pre><code>echo '[[ -s "$HOME/.rvm/scripts/rvm" ]] &amp;&amp; . "$HOME/.rvm/scripts/rvm" # Load RVM function' &gt;&gt; ~/.bash_profile
+source ~/.bash_profile
+</code></pre>
+
+<p>安裝 Ruby 1.9.2, RubyGems</p>
+
+<pre><code>rvm install 1.9.2 &amp;&amp; rvm use 1.9.2
+rvm rubygems latest
+</code></pre>
+
+<p>确认版本</p>
+
+<pre><code>ruby --version
+</code></pre>
+
+<p>Down octopress</p>
+
+<pre><code>git clone git://github.com/imathis/octopress.git octopress
+cd octopress
+</code></pre>
+
+<p>安裝 bundler</p>
+
+<pre><code>gem install bundler
+bundle install
+</code></pre>
+
+<p>安装预设场景</p>
+
+<pre><code>rake install
+</code></pre>
+
+<p>生成模版</p>
+
+<pre><code>rake generate
+</code></pre>
+
+<p>本地预览</p>
+
+<pre><code>rake preview
+</code></pre>
+
+<p>可以通过 <code>http://127.0.0.1:4000</code> 查看生成的blog</p>
+
+<h3>添加文章和page页基本操作</h3>
+
+<p>添加新文章</p>
+
+<pre><code>rake new_post["文章标题"] //可以直接输入中文，Octopress 自动将汉字转换成拼音url
+例如：rake new_post["hello"]
+</code></pre>
+
+<p>会在<code>source/_post/</code>生成<code>hello.markdown</code>的文件
+添加新页面</p>
+
+<pre><code>rake new_page["about"]
+</code></pre>
+
+<p>其他的编辑项<br/>
+blog的配置信息修改: <code>_config.yml</code></p>
+
+<h6>先写到这里，下次接着 <code>如何通过github建自己的blog站</code> &#8230;</h6>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[个人博客正式转用 Octopress]]></title>
+    <link href="http://dn365.github.com/blog/2012/11/14/ge-ren-bo-ke-zheng-shi-zhuan-yong-octopress/"/>
+    <updated>2012-11-14T14:50:00+08:00</updated>
+    <id>http://dn365.github.com/blog/2012/11/14/ge-ren-bo-ke-zheng-shi-zhuan-yong-octopress</id>
+    <content type="html"><![CDATA[<p>折腾了好几天，vps系统重装，之前的 wordpress blog 数据丢的一个不剩，心痛 &#8230;
+开始重新折腾，作为Rubyfans 放弃wordpress 用ruby方式写blog 从现在开始 用Octopress &#8230;</p>
 ]]></content>
   </entry>
   
