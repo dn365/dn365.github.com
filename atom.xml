@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Ruby fans 遥望远方]]></title>
-  <link href="http://dn365.github.com/atom.xml" rel="self"/>
-  <link href="http://dn365.github.com/"/>
-  <updated>2012-11-14T16:29:44+08:00</updated>
-  <id>http://dn365.github.com/</id>
+  <link href="http://blog.szmian.com/atom.xml" rel="self"/>
+  <link href="http://blog.szmian.com/"/>
+  <updated>2012-11-14T17:10:20+08:00</updated>
+  <id>http://blog.szmian.com/</id>
   <author>
     <name><![CDATA[dn365]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[如何用Octopress创建blog]]></title>
-    <link href="http://dn365.github.com/blog/2012/11/14/ru-he-yong-octopresschuang-jian-blog/"/>
+    <link href="http://blog.szmian.com/blog/2012/11/14/ru-he-yong-octopresschuang-jian-blog/"/>
     <updated>2012-11-14T16:21:00+08:00</updated>
-    <id>http://dn365.github.com/blog/2012/11/14/ru-he-yong-octopresschuang-jian-blog</id>
+    <id>http://blog.szmian.com/blog/2012/11/14/ru-he-yong-octopresschuang-jian-blog</id>
     <content type="html"><![CDATA[<h2>Install Octopress</h2>
 
 <h3>install rvm</h3>
@@ -96,9 +96,9 @@ blog的配置信息修改: <code>_config.yml</code></p>
   
   <entry>
     <title type="html"><![CDATA[个人博客正式转用 Octopress]]></title>
-    <link href="http://dn365.github.com/blog/2012/11/14/ge-ren-bo-ke-zheng-shi-zhuan-yong-octopress/"/>
+    <link href="http://blog.szmian.com/blog/2012/11/14/ge-ren-bo-ke-zheng-shi-zhuan-yong-octopress/"/>
     <updated>2012-11-14T14:50:00+08:00</updated>
-    <id>http://dn365.github.com/blog/2012/11/14/ge-ren-bo-ke-zheng-shi-zhuan-yong-octopress</id>
+    <id>http://blog.szmian.com/blog/2012/11/14/ge-ren-bo-ke-zheng-shi-zhuan-yong-octopress</id>
     <content type="html"><![CDATA[<p>折腾了好几天，vps系统重装，之前的 wordpress blog 数据丢的一个不剩，心痛 &#8230;
 开始重新折腾，作为Rubyfans 放弃wordpress 用ruby方式写blog 从现在开始 用Octopress &#8230;</p>
 ]]></content>
