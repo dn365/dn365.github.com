@@ -9,7 +9,8 @@
   <meta name="author" content="dn365">
 
   
-  <meta name="description" content="Install Octopress install rvm 先安装rvm环境 `bash &lt; &lt;(curl -s https://rvm.beginrescueend.com/install/rvm)` 將 rvm 指令变成 shell function echo '[[ -s "$ &hellip;">
+  <meta name="description" content="发布blog到github 前提是先成为github的注册用户，并完成一系列必要的设置。
+如何用Octopress创建blog 创建github发布环境 建立 GitHub Repository 使用 username.github.com 命名， 例如你的 GitHub 帐号是 test123 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -71,6 +72,102 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2012/11/16/yong-octopresszai-githubjian-li-zi-ji-de-blog/">用octopress在github建立blog</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-16T17:42:00+08:00" pubdate data-updated="true">Nov 16<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/11/16/yong-octopresszai-githubjian-li-zi-ji-de-blog/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>发布blog到github</h2>
+
+<blockquote><p>前提是先成为github的注册用户，并完成一系列必要的设置。<br/>
+如何<a href="http://blog.szmian.com/blog/2012/11/14/ru-he-yong-octopresschuang-jian-blog/">用Octopress创建blog</a></p></blockquote>
+
+<h2>创建github发布环境</h2>
+
+<ul>
+<li><p>建立 GitHub Repository</p>
+
+<p>使用 username.github.com 命名， 例如你的 GitHub 帐号是 test123 就将 Repository 命名为 test123.github.com， 完成后会得到一组 GitHub Pages URL http://yourname.github.com/ (注意不能用 https协议，必须用 http协议)。</p></li>
+<li><p>设定 GitHub Pages</p></li>
+</ul>
+
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rake</span> <span class="n">setup_github_pages</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>以上执行后会要求 read/write url for repository:<br/>
+输入 <code>git@github.com:yourname/yourname.github.com.git</code></p>
+
+<h2>Blog发布</h2>
+
+<p><code>cd /web/blog</code> 跳到blog目录， 执行:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rake</span> <span class="n">generate</span>
+</span><span class='line'><span class="n">rake</span> <span class="n">deploy</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>等待几分钟后，会收到一封信：“[sslab.github.com] Page build successful”，第一次发布后等比较久，之后每次都会直接更新。<br/>
+直接访问<code>http://yourname.github.com/</code>即可看到blog内容。到这一步blog发布完成。</p>
+
+<h2>创建source加入git,做blog管理</h2>
+
+<p>在blog目录执行以下命令创建source:</p>
+
+<pre><code>git add .
+git commit -m 'initial source commit'
+git push origin source  
+</code></pre>
+
+<p>将source push 到github</p>
+
+<h3>更新Octopress</h3>
+
+<p>以后当Octopress 发布新版本，可以用一下命令升级版本。</p>
+
+<pre><code>git pull octopress master     # Get the latest Octopress
+bundle install                # Keep gems updated
+rake update_source            # update the template's source
+rake update_style             # update the template's style  
+</code></pre>
+
+<blockquote><p>Octopress开始像黑客一样写博客！</p></blockquote>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2012/11/14/ru-he-yong-octopresschuang-jian-blog/">如何用Octopress创建blog</a></h1>
     
     
@@ -102,7 +199,7 @@
 
 <p>先安装rvm环境</p>
 
-<pre><code>`bash &lt; &lt;(curl -s https://rvm.beginrescueend.com/install/rvm)`
+<pre><code>bash &lt; &lt;(curl -s https://rvm.beginrescueend.com/install/rvm)
 </code></pre>
 
 <p>將 rvm 指令变成 shell function</p>
@@ -113,9 +210,13 @@ source ~/.bash_profile
 
 <p>安裝 Ruby 1.9.2, RubyGems</p>
 
-<pre><code>rvm install 1.9.2 &amp;&amp; rvm use 1.9.2
-rvm rubygems latest
-</code></pre>
+<figure class='code'><figcaption><span>RVM install ruby  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rvm</span> <span class="n">install</span> <span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">2</span> <span class="o">&amp;&amp;</span> <span class="n">rvm</span> <span class="n">use</span> <span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">2</span>
+</span><span class='line'><span class="n">rvm</span> <span class="n">rubygems</span> <span class="n">latest</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>确认版本</p>
 
@@ -159,14 +260,16 @@ bundle install
 例如：rake new_post["hello"]
 </code></pre>
 
-<p>会在<code>source/_post/</code>生成<code>hello.markdown</code>的文件
-添加新页面</p>
+<p>会在<code>source/_post/</code>生成<code>hello.markdown</code>的文件</p>
+
+<p>添加新页面</p>
 
 <pre><code>rake new_page["about"]
 </code></pre>
 
-<p>其他的编辑项<br/>
-blog的配置信息修改: <code>_config.yml</code></p>
+<p>其他的编辑项</p>
+
+<p>blog的配置信息修改: <code>_config.yml</code></p>
 
 <h6>先写到这里，下次接着 <code>如何通过github建自己的blog站</code> &#8230;</h6>
 </div>
@@ -226,6 +329,10 @@ blog的配置信息修改: <code>_config.yml</code></p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/11/16/yong-octopresszai-githubjian-li-zi-ji-de-blog/">用octopress在github建立blog</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2012/11/14/ru-he-yong-octopresschuang-jian-blog/">如何用Octopress创建blog</a>

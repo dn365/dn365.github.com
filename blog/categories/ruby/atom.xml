@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Ruby fans 遥望远方]]></title>
-  <link href="http://blog.szmian.com/atom.xml" rel="self"/>
+  <title><![CDATA[Category: ruby | Ruby fans 遥望远方]]></title>
+  <link href="http://blog.szmian.com/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://blog.szmian.com/"/>
   <updated>2012-11-16T18:39:47+08:00</updated>
   <id>http://blog.szmian.com/</id>
@@ -29,13 +29,11 @@
 <li><p>建立 GitHub Repository</p>
 
 <p>使用 username.github.com 命名， 例如你的 GitHub 帐号是 test123 就将 Repository 命名为 test123.github.com， 完成后会得到一组 GitHub Pages URL http://yourname.github.com/ (注意不能用 https协议，必须用 http协议)。</p></li>
-<li><p>设定 GitHub Pages</p></li>
-</ul>
-
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<li><p>设定 GitHub Pages<br/>
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rake</span> <span class="n">setup_github_pages</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p></li>
+</ul>
 
 
 <p>以上执行后会要求 read/write url for repository:<br/>
@@ -43,14 +41,12 @@
 
 <h2>Blog发布</h2>
 
-<p><code>cd /web/blog</code> 跳到blog目录， 执行:</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p><code>cd /web/blog</code> 跳到blog目录， 执行:<br/>
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rake</span> <span class="n">generate</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rake</span> <span class="n">generate</span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span>
 </span><span class='line'><span class="n">rake</span> <span class="n">deploy</span>
-</span></code></pre></td></tr></table></div></figure>
-
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>等待几分钟后，会收到一封信：“[sslab.github.com] Page build successful”，第一次发布后等比较久，之后每次都会直接更新。<br/>
 直接访问<code>http://yourname.github.com/</code>即可看到blog内容。到这一步blog发布完成。</p>
@@ -102,15 +98,13 @@ source ~/.bash_profile
 
 <p>安裝 Ruby 1.9.2, RubyGems</p>
 
-<figure class='code'><figcaption><span>RVM install ruby  </span></figcaption>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>RVM install ruby  </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rvm</span> <span class="n">install</span> <span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">2</span> <span class="o">&amp;&amp;</span> <span class="n">rvm</span> <span class="n">use</span> <span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rvm</span> <span class="n">install</span> <span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">2</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span> <span class="n">rvm</span> <span class="n">use</span> <span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">2</span>
 </span><span class='line'><span class="n">rvm</span> <span class="n">rubygems</span> <span class="n">latest</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>确认版本</p>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+确认版本</p>
 
 <pre><code>ruby --version
 </code></pre>
@@ -163,17 +157,7 @@ bundle install
 
 <p>blog的配置信息修改: <code>_config.yml</code></p>
 
-<h6>先写到这里，下次接着 <code>如何通过github建自己的blog站</code> &#8230;</h6>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[个人博客正式转用 Octopress]]></title>
-    <link href="http://blog.szmian.com/blog/2012/11/14/ge-ren-bo-ke-zheng-shi-zhuan-yong-octopress/"/>
-    <updated>2012-11-14T14:50:00+08:00</updated>
-    <id>http://blog.szmian.com/blog/2012/11/14/ge-ren-bo-ke-zheng-shi-zhuan-yong-octopress</id>
-    <content type="html"><![CDATA[<p>折腾了好几天，vps系统重装，之前的 wordpress blog 数据丢的一个不剩，心痛 &#8230;
-开始重新折腾，作为Rubyfans 放弃wordpress 用ruby方式写blog 从现在开始 用Octopress &#8230;</p>
+<h6>先写到这里，下次接着 <code>如何通过github建自己的blog站</code> ...</h6>
 ]]></content>
   </entry>
   

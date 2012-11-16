@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: octopress | Ruby fans 遥望远方]]></title>
+  <link href="http://blog.szmian.com/blog/categories/octopress/atom.xml" rel="self"/>
+  <link href="http://blog.szmian.com/"/>
+  <updated>2012-11-16T18:39:47+08:00</updated>
+  <id>http://blog.szmian.com/</id>
+  <author>
+    <name><![CDATA[dn365]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[如何用Octopress创建blog]]></title>
+    <link href="http://blog.szmian.com/blog/2012/11/14/ru-he-yong-octopresschuang-jian-blog/"/>
+    <updated>2012-11-14T16:21:00+08:00</updated>
+    <id>http://blog.szmian.com/blog/2012/11/14/ru-he-yong-octopresschuang-jian-blog</id>
+    <content type="html"><![CDATA[<h2>Install Octopress</h2>
+
+<h3>install rvm</h3>
+
+<p>先安装rvm环境</p>
+
+<pre><code>bash &lt; &lt;(curl -s https://rvm.beginrescueend.com/install/rvm)
+</code></pre>
+
+<p>將 rvm 指令变成 shell function</p>
+
+<pre><code>echo '[[ -s "$HOME/.rvm/scripts/rvm" ]] &amp;&amp; . "$HOME/.rvm/scripts/rvm" # Load RVM function' &gt;&gt; ~/.bash_profile
+source ~/.bash_profile
+</code></pre>
+
+<p>安裝 Ruby 1.9.2, RubyGems</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>RVM install ruby  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rvm</span> <span class="n">install</span> <span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">2</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span> <span class="n">rvm</span> <span class="n">use</span> <span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">2</span>
+</span><span class='line'><span class="n">rvm</span> <span class="n">rubygems</span> <span class="n">latest</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+确认版本</p>
+
+<pre><code>ruby --version
+</code></pre>
+
+<p>Down octopress</p>
+
+<pre><code>git clone git://github.com/imathis/octopress.git octopress
+cd octopress
+</code></pre>
+
+<p>安裝 bundler</p>
+
+<pre><code>gem install bundler
+bundle install
+</code></pre>
+
+<p>安装预设场景</p>
+
+<pre><code>rake install
+</code></pre>
+
+<p>生成模版</p>
+
+<pre><code>rake generate
+</code></pre>
+
+<p>本地预览</p>
+
+<pre><code>rake preview
+</code></pre>
+
+<p>可以通过 <code>http://127.0.0.1:4000</code> 查看生成的blog</p>
+
+<h3>添加文章和page页基本操作</h3>
+
+<p>添加新文章</p>
+
+<pre><code>rake new_post["文章标题"] //可以直接输入中文，Octopress 自动将汉字转换成拼音url
+例如：rake new_post["hello"]
+</code></pre>
+
+<p>会在<code>source/_post/</code>生成<code>hello.markdown</code>的文件</p>
+
+<p>添加新页面</p>
+
+<pre><code>rake new_page["about"]
+</code></pre>
+
+<p>其他的编辑项</p>
+
+<p>blog的配置信息修改: <code>_config.yml</code></p>
+
+<h6>先写到这里，下次接着 <code>如何通过github建自己的blog站</code> ...</h6>
+]]></content>
+  </entry>
+  
+</feed>
