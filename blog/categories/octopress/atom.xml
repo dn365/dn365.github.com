@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: octopress | Ruby fans 遥望远方]]></title>
+  <title><![CDATA[Category: Octopress | Ruby fans 遥望远方]]></title>
   <link href="http://blog.szmian.com/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://blog.szmian.com/"/>
-  <updated>2012-11-17T11:32:55+08:00</updated>
+  <updated>2012-11-17T13:14:02+08:00</updated>
   <id>http://blog.szmian.com/</id>
   <author>
     <name><![CDATA[dn365]]></name>
@@ -14,87 +14,97 @@
 
   
   <entry>
-    <title type="html"><![CDATA[如何用Octopress创建blog]]></title>
-    <link href="http://blog.szmian.com/blog/2012/11/14/ru-he-yong-octopresschuang-jian-blog/"/>
-    <updated>2012-11-14T16:21:00+08:00</updated>
-    <id>http://blog.szmian.com/blog/2012/11/14/ru-he-yong-octopresschuang-jian-blog</id>
-    <content type="html"><![CDATA[<h2>Install Octopress</h2>
+    <title type="html"><![CDATA[不错的Category plugin 在Octopresss上使用]]></title>
+    <link href="http://blog.szmian.com/blog/2012/11/17/jie-shao-yi-ge-bu-cuo-de-category-plugin-zai-octopresssshang-shi-yong/"/>
+    <updated>2012-11-17T12:05:00+08:00</updated>
+    <id>http://blog.szmian.com/blog/2012/11/17/jie-shao-yi-ge-bu-cuo-de-category-plugin-zai-octopresssshang-shi-yong</id>
+    <content type="html"><![CDATA[<p>最近刚转到Octopresss写blog,基本的的设置好之后发现还是缺了分类导航，随着文章越来越多，查看多有不便，发现一个不错的Category plugin,向大家介绍:</p>
 
-<h3>install rvm</h3>
+<blockquote><p>查看插件原作文章_ <a href="http://paz.am/blog/blog/2012/06/25/octopress-category-list-plugin/">Octopress - Category List Plug-in</a></p></blockquote>
 
-<p>先安装rvm环境</p>
+<h3>基本的操作如下</h3>
 
-<pre><code>bash &lt; &lt;(curl -s https://rvm.beginrescueend.com/install/rvm)
-</code></pre>
+<ul>
+<li>添加category_list插件到octopress plugins目录</li>
+</ul>
 
-<p>將 rvm 指令变成 shell function</p>
 
-<pre><code>echo '[[ -s "$HOME/.rvm/scripts/rvm" ]] &amp;&amp; . "$HOME/.rvm/scripts/rvm" # Load RVM function' &gt;&gt; ~/.bash_profile
-source ~/.bash_profile
-</code></pre>
-
-<p>安裝 Ruby 1.9.2, RubyGems</p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>RVM install ruby  </span></figcaption>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>添加此脚本到plugins目录 (category_list_tag.rb)</span> <a href='/downloads/code/ruby/category_list_tag.rb'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rvm</span> <span class="n">install</span> <span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">2</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span> <span class="n">rvm</span> <span class="n">use</span> <span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">2</span>
-</span><span class='line'><span class="n">rvm</span> <span class="n">rubygems</span> <span class="n">latest</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-确认版本</p>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="k">module</span> <span class="nn">Jekyll</span>
+</span><span class='line'>  <span class="k">class</span> <span class="nc">CategoryListTag</span> <span class="o">&lt;</span> <span class="no">Liquid</span><span class="o">::</span><span class="no">Tag</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">html</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+</span><span class='line'>      <span class="n">categories</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">registers</span><span class="o">[</span><span class="ss">:site</span><span class="o">].</span><span class="n">categories</span><span class="o">.</span><span class="n">keys</span>
+</span><span class='line'>      <span class="n">categories</span><span class="o">.</span><span class="n">sort</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">category</span><span class="o">|</span>
+</span><span class='line'>        <span class="n">posts_in_category</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">registers</span><span class="o">[</span><span class="ss">:site</span><span class="o">].</span><span class="n">categories</span><span class="o">[</span><span class="n">category</span><span class="o">].</span><span class="n">size</span>
+</span><span class='line'>        <span class="n">category_dir</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">registers</span><span class="o">[</span><span class="ss">:site</span><span class="o">].</span><span class="n">config</span><span class="o">[</span><span class="s1">&#39;category_dir&#39;</span><span class="o">]</span>
+</span><span class='line'>        <span class="n">category_url</span> <span class="o">=</span> <span class="no">File</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">category_dir</span><span class="p">,</span> <span class="n">category</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span><span class="sr">/_|\P{Word}/</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span><span class="sr">/-{2,}/</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">downcase</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">html</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;&lt;li class=&#39;category&#39;&gt;&lt;a href=&#39;/</span><span class="si">#{</span><span class="n">category_url</span><span class="si">}</span><span class="s2">/&#39;&gt;</span><span class="si">#{</span><span class="n">category</span><span class="si">}</span><span class="s2"> (</span><span class="si">#{</span><span class="n">posts_in_category</span><span class="si">}</span><span class="s2">)&lt;/a&gt;&lt;/li&gt;</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>      <span class="n">html</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">Liquid</span><span class="o">::</span><span class="no">Template</span><span class="o">.</span><span class="n">register_tag</span><span class="p">(</span><span class="s1">&#39;category_list&#39;</span><span class="p">,</span> <span class="no">Jekyll</span><span class="o">::</span><span class="no">CategoryListTag</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div><br/>
+这个插件会按类别生成名称为category_list的tag,并用 liquid的templating 以列表的方式组织起全站的Category.</p>
 
-<pre><code>ruby --version
-</code></pre>
+<ul>
+<li>在侧边添加Category导航栏</li>
+</ul>
 
-<p>Down octopress</p>
 
-<pre><code>git clone git://github.com/imathis/octopress.git octopress
-cd octopress
-</code></pre>
+<p>创建<code>category_list.html</code>文件到<code>source/_includes/asides/</code>目录， 代码如下:<br/>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>category_list.html (category_list.html)</span> <a href='/downloads/code/html/category_list.html'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;section&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;h1&gt;</span>Categories<span class="nt">&lt;/h1&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;ul</span> <span class="na">id=</span><span class="s">&quot;categories&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    {% category_list %}
+</span><span class='line'>  <span class="nt">&lt;/ul&gt;</span>
+</span><span class='line'><span class="nt">&lt;/section&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
-<p>安裝 bundler</p>
+<ul>
+<li>修改_config.yml文件，将category_list.html添加到侧边栏</li>
+</ul>
 
-<pre><code>gem install bundler
-bundle install
-</code></pre>
 
-<p>安装预设场景</p>
+<p>修改default_asides项:
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>_config.yml  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">default_asides</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="nv">asides/category_list.html</span><span class="p-Indicator">,</span> <span class="nv">asides/recent_posts.html</span><span class="p-Indicator">,</span> <span class="nv">asides/github.html</span><span class="p-Indicator">,</span> <span class="nv">asides/twitter.html</span><span class="p-Indicator">,</span> <span class="nv">asides/delicious.html</span><span class="p-Indicator">,</span> <span class="nv">asides/pinboard.html</span><span class="p-Indicator">,</span> <span class="nv">asides/googleplus.html</span><span class="p-Indicator">]</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
-<pre><code>rake install
-</code></pre>
-
-<p>生成模版</p>
+<p>可以根据需求调整asides ...<br/>
+现在赶快预览一下效果吧.</p>
 
 <pre><code>rake generate
+rake preview
 </code></pre>
-
-<p>本地预览</p>
-
-<pre><code>rake preview
-</code></pre>
-
-<p>可以通过 <code>http://127.0.0.1:4000</code> 查看生成的blog</p>
-
-<h3>添加文章和page页基本操作</h3>
-
-<p>添加新文章</p>
-
-<pre><code>rake new_post["文章标题"] //可以直接输入中文，Octopress 自动将汉字转换成拼音url
-例如：rake new_post["hello"]
-</code></pre>
-
-<p>会在<code>source/_post/</code>生成<code>hello.markdown</code>的文件</p>
-
-<p>添加新页面</p>
-
-<pre><code>rake new_page["about"]
-</code></pre>
-
-<p>其他的编辑项</p>
-
-<p>blog的配置信息修改: <code>_config.yml</code></p>
-
-<h6>先写到这里，下次接着 <code>如何通过github建自己的blog站</code> ...</h6>
 ]]></content>
   </entry>
   
