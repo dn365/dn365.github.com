@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: 日志检索 | Ruby fans 遥望远方]]></title>
-  <link href="http://blog.szmian.com/blog/categories/日志检索/atom.xml" rel="self"/>
+  <title><![CDATA[Category: logsearch | Ruby fans 遥望远方]]></title>
+  <link href="http://blog.szmian.com/blog/categories/logsearch/atom.xml" rel="self"/>
   <link href="http://blog.szmian.com/"/>
-  <updated>2012-11-22T17:05:32+08:00</updated>
+  <updated>2012-11-22T17:23:16+08:00</updated>
   <id>http://blog.szmian.com/</id>
   <author>
     <name><![CDATA[dn365]]></name>
