@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Ruby fans 遥望远方</title>
+  <title>logstash加graylog2实现日志检索 - Ruby fans 遥望远方</title>
   <meta name="author" content="dn365">
 
   
@@ -20,7 +20,7 @@ logstash是一个jar的包文件，可以在其官网现在logstash获得程序�
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.szmian.com/">
+  <link rel="canonical" href="http://blog.szmian.com/blog/2012/11/22/logstashjia-graylog2shi-xian-ri-zhi-jian-suo/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -65,15 +65,12 @@ logstash是一个jar的包文件，可以在其官网现在logstash获得程序�
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2012/11/22/logstashjia-graylog2shi-xian-ri-zhi-jian-suo/">Logstash加graylog2实现日志检索</a></h1>
+      <h1 class="entry-title">Logstash加graylog2实现日志检索</h1>
     
     
       <p class="meta">
@@ -91,14 +88,14 @@ logstash是一个jar的包文件，可以在其官网现在logstash获得程序�
 
 <time datetime="2012-11-22T15:12:00+08:00" pubdate data-updated="true">Nov 22<span>nd</span>, 2012</time>
         
-         | <a href="/blog/2012/11/22/logstashjia-graylog2shi-xian-ri-zhi-jian-suo/#disqus_thread">Comments</a>
+         | <a href="#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><h3>logstash 安装和基本配置</h3>
+<div class="entry-content"><h3>logstash 安装和基本配置</h3>
 
 <blockquote><p>也可参考英文-<a href="http://sphughes.com/2012/01/01/a-more-secure-logstash-install/">A more secure logstash install</a>请先确保系统已经安装了java环境</p></blockquote>
 
@@ -711,155 +708,16 @@ rails s -e production -p 80
 
 <p>然后访问http://ip地址，看到不一样的日志文件。</p>
 </div>
-  
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/11/17/jie-shao-yi-ge-bu-cuo-de-category-plugin-zai-octopresssshang-shi-yong/">不错的Category Plugin 在Octopresss上使用</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
   
 
+<span class="byline author vcard">Posted by <span class="fn">dn365</span></span>
 
-<time datetime="2012-11-17T12:05:00+08:00" pubdate data-updated="true">Nov 17<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/11/17/jie-shao-yi-ge-bu-cuo-de-category-plugin-zai-octopresssshang-shi-yong/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>最近刚转到Octopresss写blog,基本的的设置好之后发现还是缺了分类导航，随着文章越来越多，查看多有不便，发现一个不错的Category plugin,向大家介绍:</p>
-
-<blockquote><p>查看插件原作文章_ <a href="http://paz.am/blog/blog/2012/06/25/octopress-category-list-plugin/">Octopress - Category List Plug-in</a></p></blockquote>
-
-<h3>基本的操作如下</h3>
-
-<ul>
-<li>添加category_list插件到octopress plugins目录</li>
-</ul>
-
-
-<figure class='code'><figcaption><span>添加此脚本到plugins目录 (category_list_tag.rb)</span> <a href='/downloads/code/ruby/category_list_tag.rb'>download</a></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="k">module</span> <span class="nn">Jekyll</span>
-</span><span class='line'>  <span class="k">class</span> <span class="nc">CategoryListTag</span> <span class="o">&lt;</span> <span class="no">Liquid</span><span class="o">::</span><span class="no">Tag</span>
-</span><span class='line'>    <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
-</span><span class='line'>      <span class="n">html</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-</span><span class='line'>      <span class="n">categories</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">registers</span><span class="o">[</span><span class="ss">:site</span><span class="o">].</span><span class="n">categories</span><span class="o">.</span><span class="n">keys</span>
-</span><span class='line'>      <span class="n">categories</span><span class="o">.</span><span class="n">sort</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">category</span><span class="o">|</span>
-</span><span class='line'>        <span class="n">posts_in_category</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">registers</span><span class="o">[</span><span class="ss">:site</span><span class="o">].</span><span class="n">categories</span><span class="o">[</span><span class="n">category</span><span class="o">].</span><span class="n">size</span>
-</span><span class='line'>        <span class="n">category_dir</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">registers</span><span class="o">[</span><span class="ss">:site</span><span class="o">].</span><span class="n">config</span><span class="o">[</span><span class="s1">&#39;category_dir&#39;</span><span class="o">]</span>
-</span><span class='line'>        <span class="n">category_url</span> <span class="o">=</span> <span class="no">File</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">category_dir</span><span class="p">,</span> <span class="n">category</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span><span class="sr">/_|\P{Word}/</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span><span class="sr">/-{2,}/</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">downcase</span><span class="p">)</span>
-</span><span class='line'>        <span class="n">html</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;&lt;li class=&#39;category&#39;&gt;&lt;a href=&#39;/</span><span class="si">#{</span><span class="n">category_url</span><span class="si">}</span><span class="s2">/&#39;&gt;</span><span class="si">#{</span><span class="n">category</span><span class="si">}</span><span class="s2"> (</span><span class="si">#{</span><span class="n">posts_in_category</span><span class="si">}</span><span class="s2">)&lt;/a&gt;&lt;/li&gt;</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span class='line'>      <span class="k">end</span>
-</span><span class='line'>      <span class="n">html</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="no">Liquid</span><span class="o">::</span><span class="no">Template</span><span class="o">.</span><span class="n">register_tag</span><span class="p">(</span><span class="s1">&#39;category_list&#39;</span><span class="p">,</span> <span class="no">Jekyll</span><span class="o">::</span><span class="no">CategoryListTag</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>
-这个插件会按类别生成名称为category_list的tag,并用 liquid的templating 以列表的方式组织起全站的Category.</p>
-
-<ul>
-<li>在侧边添加Category导航栏</li>
-</ul>
-
-
-<p>创建<code>category_list.html</code>文件到<code>source/_includes/asides/</code>目录， 代码如下:</p>
-
-<figure class='code'><figcaption><span>category_list.html (category_list.html)</span> <a href='/downloads/code/html/category_list.html'>download</a></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;section&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;h1&gt;</span>Categories<span class="nt">&lt;/h1&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;ul</span> <span class="na">id=</span><span class="s">&quot;categories&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    {% category_list %}
-</span><span class='line'>  <span class="nt">&lt;/ul&gt;</span>
-</span><span class='line'><span class="nt">&lt;/section&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<ul>
-<li>修改_config.yml文件，将category_list.html添加到侧边栏</li>
-</ul>
-
-
-<p>修改default_asides项:</p>
-
-<figure class='code'><figcaption><span>_config.yml  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">default_asides</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="nv">asides/category_list.html</span><span class="p-Indicator">,</span> <span class="nv">asides/recent_posts.html</span><span class="p-Indicator">,</span> <span class="nv">asides/github.html</span><span class="p-Indicator">,</span> <span class="nv">asides/twitter.html</span><span class="p-Indicator">,</span> <span class="nv">asides/delicious.html</span><span class="p-Indicator">,</span> <span class="nv">asides/pinboard.html</span><span class="p-Indicator">,</span> <span class="nv">asides/googleplus.html</span><span class="p-Indicator">]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>可以根据需求调整asides &#8230;<br/>
-现在赶快预览一下效果吧.</p>
-
-<pre><code>rake generate
-rake preview
-</code></pre>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/11/16/yong-octopresszai-githubjian-li-zi-ji-de-blog/">用octopress在github建立blog</a></h1>
-    
-    
-      <p class="meta">
-        
 
 
 
@@ -871,242 +729,44 @@ rake preview
   
 
 
-<time datetime="2012-11-16T17:42:00+08:00" pubdate data-updated="true">Nov 16<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/11/16/yong-octopresszai-githubjian-li-zi-ji-de-blog/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>发布blog到github</h2>
-
-<blockquote><p>前提是先成为github的注册用户，并完成一系列必要的设置。<br/>
-如何<a href="http://blog.szmian.com/blog/2012/11/14/ru-he-yong-octopresschuang-jian-blog/">用Octopress创建blog</a></p></blockquote>
-
-<h2>创建github发布环境</h2>
-
-<ul>
-<li><p>建立 GitHub Repository</p>
-
-<p>使用 username.github.com 命名， 例如你的 GitHub 帐号是 test123 就将 Repository 命名为 test123.github.com， 完成后会得到一组 GitHub Pages URL http://yourname.github.com/ (注意不能用 https协议，必须用 http协议)。</p></li>
-<li><p>设定 GitHub Pages</p></li>
-</ul>
-
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rake</span> <span class="n">setup_github_pages</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>以上执行后会要求 read/write url for repository:<br/>
-输入 <code>git@github.com:yourname/yourname.github.com.git</code></p>
-
-<h2>Blog发布</h2>
-
-<p><code>cd /web/blog</code> 跳到blog目录， 执行:</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rake</span> <span class="n">generate</span>
-</span><span class='line'><span class="n">rake</span> <span class="n">deploy</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>等待几分钟后，会收到一封信：“[sslab.github.com] Page build successful”，第一次发布后等比较久，之后每次都会直接更新。<br/>
-直接访问<code>http://yourname.github.com/</code>即可看到blog内容。到这一步blog发布完成。</p>
-
-<h2>创建source加入git,做blog管理</h2>
-
-<p>在blog目录执行以下命令创建source:</p>
-
-<pre><code>git add .
-git commit -m 'initial source commit'
-git push origin source  
-</code></pre>
-
-<p>将source push 到github</p>
-
-<h3>更新Octopress</h3>
-
-<p>以后当Octopress 发布新版本，可以用一下命令升级版本。</p>
-
-<pre><code>git pull octopress master     # Get the latest Octopress
-bundle install                # Keep gems updated
-rake update_source            # update the template's source
-rake update_style             # update the template's style  
-</code></pre>
-
-<blockquote><p>Octopress开始像黑客一样写博客！</p></blockquote>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
+<time datetime="2012-11-22T15:12:00+08:00" pubdate data-updated="true">Nov 22<span>nd</span>, 2012</time>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/11/14/ru-he-yong-octopresschuang-jian-blog/">如何用Octopress创建blog</a></h1>
-    
-    
-      <p class="meta">
-        
 
-
-
-
-
-
-
-
+<span class="categories">
   
+    <a class='category' href='/blog/categories/graylog2/'>graylog2</a>, <a class='category' href='/blog/categories/logstash/'>logstash</a>, <a class='category' href='/blog/categories/日志检索/'>日志检索</a>
+  
+</span>
 
 
-<time datetime="2012-11-14T16:21:00+08:00" pubdate data-updated="true">Nov 14<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/11/14/ru-he-yong-octopresschuang-jian-blog/#disqus_thread">Comments</a>
-        
-      </p>
+    </p>
     
-  </header>
-
-
-  <div class="entry-content"><h2>Install Octopress</h2>
-
-<h3>install rvm</h3>
-
-<p>先安装rvm环境</p>
-
-<pre><code>bash &lt; &lt;(curl -s https://rvm.beginrescueend.com/install/rvm)
-</code></pre>
-
-<p>將 rvm 指令变成 shell function</p>
-
-<pre><code>echo '[[ -s "$HOME/.rvm/scripts/rvm" ]] &amp;&amp; . "$HOME/.rvm/scripts/rvm" # Load RVM function' &gt;&gt; ~/.bash_profile
-source ~/.bash_profile
-</code></pre>
-
-<p>安裝 Ruby 1.9.2, RubyGems</p>
-
-<figure class='code'><figcaption><span>RVM install ruby  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rvm</span> <span class="n">install</span> <span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">2</span> <span class="o">&amp;&amp;</span> <span class="n">rvm</span> <span class="n">use</span> <span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">2</span>
-</span><span class='line'><span class="n">rvm</span> <span class="n">rubygems</span> <span class="n">latest</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>确认版本</p>
-
-<pre><code>ruby --version
-</code></pre>
-
-<p>Down octopress</p>
-
-<pre><code>git clone git://github.com/imathis/octopress.git octopress
-cd octopress
-</code></pre>
-
-<p>安裝 bundler</p>
-
-<pre><code>gem install bundler
-bundle install
-</code></pre>
-
-<p>安装预设场景</p>
-
-<pre><code>rake install
-</code></pre>
-
-<p>生成模版</p>
-
-<pre><code>rake generate
-</code></pre>
-
-<p>本地预览</p>
-
-<pre><code>rake preview
-</code></pre>
-
-<p>可以通过 <code>http://127.0.0.1:4000</code> 查看生成的blog</p>
-
-<h3>添加文章和page页基本操作</h3>
-
-<p>添加新文章</p>
-
-<pre><code>rake new_post["文章标题"] //可以直接输入中文，Octopress 自动将汉字转换成拼音url
-例如：rake new_post["hello"]
-</code></pre>
-
-<p>会在<code>source/_post/</code>生成<code>hello.markdown</code>的文件</p>
-
-<p>添加新页面</p>
-
-<pre><code>rake new_page["about"]
-</code></pre>
-
-<p>其他的编辑项</p>
-
-<p>blog的配置信息修改: <code>_config.yml</code></p>
-
-<h6>先写到这里，下次接着 <code>如何通过github建自己的blog站</code> &#8230;</h6>
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.szmian.com/blog/2012/11/22/logstashjia-graylog2shi-xian-ri-zhi-jian-suo/" data-via="" data-counturl="http://blog.szmian.com/blog/2012/11/22/logstashjia-graylog2shi-xian-ri-zhi-jian-suo/" >Tweet</a>
+  
+  
+  
 </div>
-  
-  
 
-
-    </article>
-  
-  
-    <article>
+    
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/11/14/ge-ren-bo-ke-zheng-shi-zhuan-yong-octopress/">个人博客正式转用 Octopress</a></h1>
-    
-    
-      <p class="meta">
-        
+        <a class="basic-alignment left" href="/blog/2012/11/17/jie-shao-yi-ge-bu-cuo-de-category-plugin-zai-octopresssshang-shi-yong/" title="Previous Post: 不错的Category plugin 在Octopresss上使用">&laquo; 不错的Category plugin 在Octopresss上使用</a>
+      
+      
+    </p>
+  </footer>
+</article>
 
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-11-14T14:50:00+08:00" pubdate data-updated="true">Nov 14<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/11/14/ge-ren-bo-ke-zheng-shi-zhuan-yong-octopress/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>折腾了好几天，vps系统重装，之前的 wordpress blog 数据丢的一个不剩，心痛 &#8230;
-开始重新折腾，作为Rubyfans 放弃wordpress 用ruby方式写blog 从现在开始 用Octopress &#8230;</p>
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
-  
-  
+  </section>
 
-
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
 </div>
+
 <aside class="sidebar">
   
     <section>
@@ -1149,6 +809,7 @@ bundle install
   
 </aside>
 
+
     </div>
   </div>
   <footer role="contentinfo"><p>
@@ -1163,7 +824,10 @@ bundle install
       var disqus_shortname = 'dn365-blog';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.szmian.com/blog/2012/11/22/logstashjia-graylog2shi-xian-ri-zhi-jian-suo/';
+        var disqus_url = 'http://blog.szmian.com/blog/2012/11/22/logstashjia-graylog2shi-xian-ri-zhi-jian-suo/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

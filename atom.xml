@@ -4,7 +4,7 @@
   <title><![CDATA[Ruby fans 遥望远方]]></title>
   <link href="http://blog.szmian.com/atom.xml" rel="self"/>
   <link href="http://blog.szmian.com/"/>
-  <updated>2012-11-17T13:14:02+08:00</updated>
+  <updated>2012-11-22T17:05:32+08:00</updated>
   <id>http://blog.szmian.com/</id>
   <author>
     <name><![CDATA[dn365]]></name>
@@ -12,6 +12,626 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[logstash加graylog2实现日志检索]]></title>
+    <link href="http://blog.szmian.com/blog/2012/11/22/logstashjia-graylog2shi-xian-ri-zhi-jian-suo/"/>
+    <updated>2012-11-22T15:12:00+08:00</updated>
+    <id>http://blog.szmian.com/blog/2012/11/22/logstashjia-graylog2shi-xian-ri-zhi-jian-suo</id>
+    <content type="html"><![CDATA[<h3>logstash 安装和基本配置</h3>
+
+<blockquote><p>也可参考英文-<a href="http://sphughes.com/2012/01/01/a-more-secure-logstash-install/">A more secure logstash install</a>请先确保系统已经安装了java环境</p></blockquote>
+
+<ul>
+<li><p>下载logstash<br/>
+logstash是一个jar的包文件，可以在其官网现在<a href="http://logstash.net">logstash</a>获得程序和相关操作文档。</p></li>
+<li><p>安装logstash<br/>
+下载脚本prog_dir_setup.sh文件到本地:</p></li>
+</ul>
+
+
+<figure class='code'><figcaption><span>下载prog_dir_setup.sh (prog_dir_setup.sh)</span> <a href='http://blog.szmian.com/downloads/code/shell/prog_dir_setup.sh'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+<span class='line-number'>106</span>
+<span class='line-number'>107</span>
+<span class='line-number'>108</span>
+<span class='line-number'>109</span>
+<span class='line-number'>110</span>
+<span class='line-number'>111</span>
+<span class='line-number'>112</span>
+<span class='line-number'>113</span>
+<span class='line-number'>114</span>
+<span class='line-number'>115</span>
+<span class='line-number'>116</span>
+<span class='line-number'>117</span>
+<span class='line-number'>118</span>
+<span class='line-number'>119</span>
+<span class='line-number'>120</span>
+<span class='line-number'>121</span>
+<span class='line-number'>122</span>
+<span class='line-number'>123</span>
+<span class='line-number'>124</span>
+<span class='line-number'>125</span>
+<span class='line-number'>126</span>
+<span class='line-number'>127</span>
+<span class='line-number'>128</span>
+<span class='line-number'>129</span>
+<span class='line-number'>130</span>
+<span class='line-number'>131</span>
+<span class='line-number'>132</span>
+<span class='line-number'>133</span>
+<span class='line-number'>134</span>
+<span class='line-number'>135</span>
+<span class='line-number'>136</span>
+<span class='line-number'>137</span>
+<span class='line-number'>138</span>
+<span class='line-number'>139</span>
+<span class='line-number'>140</span>
+<span class='line-number'>141</span>
+<span class='line-number'>142</span>
+<span class='line-number'>143</span>
+<span class='line-number'>144</span>
+<span class='line-number'>145</span>
+<span class='line-number'>146</span>
+<span class='line-number'>147</span>
+<span class='line-number'>148</span>
+<span class='line-number'>149</span>
+<span class='line-number'>150</span>
+<span class='line-number'>151</span>
+<span class='line-number'>152</span>
+<span class='line-number'>153</span>
+<span class='line-number'>154</span>
+<span class='line-number'>155</span>
+<span class='line-number'>156</span>
+<span class='line-number'>157</span>
+<span class='line-number'>158</span>
+<span class='line-number'>159</span>
+<span class='line-number'>160</span>
+<span class='line-number'>161</span>
+<span class='line-number'>162</span>
+<span class='line-number'>163</span>
+<span class='line-number'>164</span>
+<span class='line-number'>165</span>
+<span class='line-number'>166</span>
+<span class='line-number'>167</span>
+<span class='line-number'>168</span>
+<span class='line-number'>169</span>
+<span class='line-number'>170</span>
+<span class='line-number'>171</span>
+<span class='line-number'>172</span>
+<span class='line-number'>173</span>
+<span class='line-number'>174</span>
+<span class='line-number'>175</span>
+<span class='line-number'>176</span>
+<span class='line-number'>177</span>
+<span class='line-number'>178</span>
+<span class='line-number'>179</span>
+<span class='line-number'>180</span>
+<span class='line-number'>181</span>
+<span class='line-number'>182</span>
+<span class='line-number'>183</span>
+<span class='line-number'>184</span>
+<span class='line-number'>185</span>
+<span class='line-number'>186</span>
+<span class='line-number'>187</span>
+<span class='line-number'>188</span>
+<span class='line-number'>189</span>
+<span class='line-number'>190</span>
+<span class='line-number'>191</span>
+<span class='line-number'>192</span>
+<span class='line-number'>193</span>
+<span class='line-number'>194</span>
+<span class='line-number'>195</span>
+<span class='line-number'>196</span>
+<span class='line-number'>197</span>
+<span class='line-number'>198</span>
+<span class='line-number'>199</span>
+<span class='line-number'>200</span>
+<span class='line-number'>201</span>
+<span class='line-number'>202</span>
+<span class='line-number'>203</span>
+<span class='line-number'>204</span>
+<span class='line-number'>205</span>
+<span class='line-number'>206</span>
+<span class='line-number'>207</span>
+<span class='line-number'>208</span>
+<span class='line-number'>209</span>
+<span class='line-number'>210</span>
+<span class='line-number'>211</span>
+<span class='line-number'>212</span>
+<span class='line-number'>213</span>
+<span class='line-number'>214</span>
+<span class='line-number'>215</span>
+<span class='line-number'>216</span>
+<span class='line-number'>217</span>
+<span class='line-number'>218</span>
+<span class='line-number'>219</span>
+<span class='line-number'>220</span>
+<span class='line-number'>221</span>
+<span class='line-number'>222</span>
+<span class='line-number'>223</span>
+<span class='line-number'>224</span>
+<span class='line-number'>225</span>
+<span class='line-number'>226</span>
+<span class='line-number'>227</span>
+<span class='line-number'>228</span>
+<span class='line-number'>229</span>
+<span class='line-number'>230</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c">#!/bin/sh</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###  This script will set up your program&#39;s working environment on a CentOS Environment</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###  Our Installation Base is &quot;/usr/local/bin/$INSTALL_NAME&quot;</span>
+</span><span class='line'><span class="c">###    where we create subdirectories: bin and lib.</span>
+</span><span class='line'><span class="c">###  Our Log file, data, and pid Base is &quot;/var/spool/$INSTALL_NAME&quot;</span>
+</span><span class='line'><span class="c">###    where we create subdirectories: data, log, and pid.</span>
+</span><span class='line'><span class="c">###  Our Config file BASE will be &quot;/etc/$INSTALL_NAME&quot;.</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###  You can change those to work in a chroot environment below</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###  We also create a user name &quot;$INSTALL_NAME&quot; and change ownership</span>
+</span><span class='line'><span class="c">###    of the &quot;/var/spool/$INSTALL_NAME&quot; subdirectories to &quot;$INSTALL_NAME.root&quot;</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###  We also write out an installation log file in &quot;/tmp&quot;</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###  </span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###  I hope you find this script useful.</span>
+</span><span class='line'><span class="c">###  - Shaun &quot;http://sphughes.com&quot;</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###  Copyright 2011 Shaun Hughes</span>
+</span><span class='line'><span class="c">###  </span>
+</span><span class='line'><span class="c">###   Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+</span><span class='line'><span class="c">###   you may not use this file except in compliance with the License.</span>
+</span><span class='line'><span class="c">###   You may obtain a copy of the License at</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###       http://www.apache.org/licenses/LICENSE-2.0</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###   Unless required by applicable law or agreed to in writing, software</span>
+</span><span class='line'><span class="c">###   distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+</span><span class='line'><span class="c">###   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+</span><span class='line'><span class="c">###   See the License for the specific language governing permissions and</span>
+</span><span class='line'><span class="c">###   limitations under the License.</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###  We check for our one necessary user supplied variable below</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="o">[</span> -z <span class="k">${</span><span class="nv">1</span><span class="k">}</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> -e <span class="s2">&quot;\n -- \&quot;USAGE: prog_dir_setup.sh YourProgramNameThatYouAreSettingUpTheEnvironment\&quot; -- \n&quot;</span> <span class="o">&amp;&amp;</span> <span class="nb">exit </span>1;
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###   We test to see if we have root priveledges below</span>
+</span><span class='line'><span class="c">###     Comment out the ([ `id -u ....) line to run as another user for testing purposes or creating a chroot environment</span>
+</span><span class='line'><span class="c">###     Also comment out the (CHRT_BASE=&#39;&#39;) line and uncomment the (CHRT_BASE=&quot;/home/`whoami`&quot; line</span>
+</span><span class='line'><span class="c">###     Reverse the process to run as root</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="o">[</span> <span class="sb">`</span>id -u<span class="sb">`</span> -ne <span class="s2">&quot;0&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> -e <span class="s2">&quot;\n -- error: You are not root user - exiting -- \n&quot;</span> <span class="o">&amp;&amp;</span> <span class="nb">exit </span>1;
+</span><span class='line'><span class="nv">CHRT_BASE</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+</span><span class='line'><span class="c">#CHRT_BASE=&quot;/home/`whoami`&quot;</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###   We will set some variables below so I can re-use this script</span>
+</span><span class='line'><span class="c">###   The &quot;INSTALL_NAME&quot; is the name of the program we will be preparing</span>
+</span><span class='line'><span class="c">###   the environment to run, change as you see fit.</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="nv">INSTALL_NAME</span><span class="o">=</span><span class="s2">&quot;$1&quot;</span>
+</span><span class='line'><span class="nv">INSTALL_BASE</span><span class="o">=</span><span class="k">${</span><span class="nv">CHRT_BASE</span><span class="k">}</span><span class="s1">&#39;/usr/local/bin&#39;</span>
+</span><span class='line'><span class="nv">LOG_BASE</span><span class="o">=</span><span class="k">${</span><span class="nv">CHRT_BASE</span><span class="k">}</span><span class="s1">&#39;/var/spool&#39;</span>
+</span><span class='line'><span class="nv">CONF_BASE</span><span class="o">=</span><span class="k">${</span><span class="nv">CHRT_BASE</span><span class="k">}</span><span class="s1">&#39;/etc&#39;</span>
+</span><span class='line'><span class="nv">OUT_LOG_BASE</span><span class="o">=</span><span class="s1">&#39;/tmp&#39;</span>
+</span><span class='line'><span class="nv">RUNTIME</span><span class="o">=</span><span class="sb">`</span>date +%Y%m%d-%H%M%S<span class="sb">`</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###   Now we&#39;ll conbine the variables to create the desired paths</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="nv">INSTALL_DIR</span><span class="o">=</span><span class="s2">&quot;${INSTALL_BASE}/${INSTALL_NAME}&quot;</span>
+</span><span class='line'><span class="nv">LOG_DIR</span><span class="o">=</span><span class="s2">&quot;${LOG_BASE}/${INSTALL_NAME}&quot;</span>
+</span><span class='line'><span class="nv">CONF_DIR</span><span class="o">=</span><span class="s2">&quot;${CONF_BASE}/${INSTALL_NAME}&quot;</span>
+</span><span class='line'><span class="nv">OUT_LOG</span><span class="o">=</span><span class="s2">&quot;${OUT_LOG_BASE}/${INSTALL_NAME}_install-${RUNTIME}.log&quot;</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###    We test if our program is already a user or a group</span>
+</span><span class='line'><span class="c">###    and we exit with some basic error messages</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'>grep <span class="s2">&quot;^${INSTALL_NAME}&quot;</span> /etc/passwd <span class="o">&amp;&amp;</span> <span class="nb">echo</span> -e <span class="s2">&quot;\n--error: User ${INSTALL_NAME} exists - exiting--\n&quot;</span> <span class="o">&amp;&amp;</span> <span class="nb">exit </span>1;
+</span><span class='line'>grep <span class="s2">&quot;^${INSTALL_NAME}&quot;</span> /etc/group <span class="o">&amp;&amp;</span> <span class="nb">echo</span> -e <span class="s2">&quot;\n--error: Group ${INSTALL_NAME} exists - exiting--\n&quot;</span> <span class="o">&amp;&amp;</span> <span class="nb">exit </span>1;
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###  This function below will be used to verify if a target (ie. directory, file, etc.) exists</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'>check_target_exists<span class="o">()</span>
+</span><span class='line'><span class="o">{</span>
+</span><span class='line'>  <span class="o">[</span> -e <span class="k">${</span><span class="nv">1</span><span class="k">}</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="nb">echo</span> -e <span class="s2">&quot;\n -- error: ${1} exists - exiting -- \n&quot;</span> <span class="o">&amp;&amp;</span> <span class="nb">exit </span>1<span class="o">)</span>;
+</span><span class='line'>  <span class="k">return </span>0
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###  This function will be used to create directory ${1} and log output to a file specified in ${2}</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'>create_dir_and_log<span class="o">()</span>
+</span><span class='line'><span class="o">{</span>
+</span><span class='line'>   <span class="o">(</span>mkdir -v <span class="k">${</span><span class="nv">1</span><span class="k">}</span> 2&gt;&amp;1<span class="o">)</span>|tee -a <span class="k">${</span><span class="nv">2</span><span class="k">}</span> <span class="o">||</span> <span class="o">(</span><span class="nb">echo</span> -e <span class="s2">&quot;\n -- error: Unable to write to ${2} -- \</span>
+</span><span class='line'><span class="s2">\n           -- likely permission issue - exiting -- \n&quot;</span> <span class="o">&amp;&amp;</span> <span class="nb">exit </span>1<span class="o">)</span>;
+</span><span class='line'>   <span class="o">[</span> -e <span class="k">${</span><span class="nv">1</span><span class="k">}</span> <span class="o">]</span> <span class="o">||</span> <span class="o">(</span><span class="nb">echo</span> -e <span class="s2">&quot;\n -- error: Unable to create ${1} -- \</span>
+</span><span class='line'><span class="s2">\n           -- likely permission issue - exiting -- \n&quot;</span> <span class="o">&amp;&amp;</span> <span class="nb">exit </span>1<span class="o">)</span>;
+</span><span class='line'>   <span class="o">[</span> -e <span class="k">${</span><span class="nv">2</span><span class="k">}</span> <span class="o">]</span> <span class="o">||</span> <span class="o">(</span><span class="nb">echo</span> -e <span class="s2">&quot;\n -- error: Unable to create ${2} -- \</span>
+</span><span class='line'><span class="s2">\n           -- likely permission issue - exiting -- \n&quot;</span> <span class="o">&amp;&amp;</span> <span class="nb">exit </span>1<span class="o">)</span>;
+</span><span class='line'>   <span class="k">return </span>0
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###  This function combines the verification and creating and logging functions</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'>check_create_and_log<span class="o">()</span>
+</span><span class='line'><span class="o">{</span>
+</span><span class='line'>check_target_exists <span class="k">${</span><span class="nv">1</span><span class="k">}</span> <span class="o">&amp;&amp;</span> create_dir_and_log <span class="k">${</span><span class="nv">1</span><span class="k">}</span> <span class="k">${</span><span class="nv">2</span><span class="k">}</span>;
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###  Now we will check to see if something similarly named exists where we plan to create</span>
+</span><span class='line'><span class="c">###  our install directory, log directory, and config directory</span>
+</span><span class='line'><span class="c">###  We use the &quot;check_target_exists&quot; function above</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###  We could comment out these lines and use the check when we create each directory</span>
+</span><span class='line'><span class="c">###    but this keeps the user from having to proceed further if any of these exist </span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'>check_target_exists <span class="k">${</span><span class="nv">INSTALL_DIR</span><span class="k">}</span>;
+</span><span class='line'>check_target_exists <span class="k">${</span><span class="nv">LOG_DIR</span><span class="k">}</span>;
+</span><span class='line'>check_target_exists <span class="k">${</span><span class="nv">CONF_DIR</span><span class="k">}</span>;
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###  Now we will let the user know what we are planning to do</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'>clear
+</span><span class='line'><span class="nb">echo</span> -e <span class="s2">&quot;\n&quot;</span>;
+</span><span class='line'><span class="nb">echo</span> -e <span class="s2">&quot;  We will be creating a system account named \&quot;${INSTALL_NAME}\&quot;&quot;</span>;
+</span><span class='line'><span class="nb">echo</span> -e <span class="s2">&quot;  We will be creating an install Directory named \&quot;${INSTALL_DIR}\&quot;&quot;</span>;
+</span><span class='line'><span class="nb">echo</span> -e <span class="s2">&quot;  We will be creating a Logging/Data Directory named \&quot;${LOG_DIR}\&quot;&quot;</span>;
+</span><span class='line'><span class="nb">echo</span> -e <span class="s2">&quot;  We will also be creating a Configuration Directory named \&quot;${CONF_DIR}\&quot;&quot;</span>;
+</span><span class='line'><span class="nb">echo</span> -e <span class="s2">&quot;\n&quot;</span>;
+</span><span class='line'><span class="k">if</span> <span class="o">[</span> ! -z <span class="k">${</span><span class="nv">CHRT_BASE</span><span class="k">}</span> <span class="o">]</span>; <span class="k">then</span>
+</span><span class='line'><span class="o">{</span>
+</span><span class='line'><span class="nb">echo</span> -e <span class="s2">&quot; -- We will also be  Creating the chroot base directories -- &quot;</span>;
+</span><span class='line'><span class="nb">echo</span> -e <span class="s2">&quot; -- The chroot base is \&quot;${CHRT_BASE}\&quot; -- &quot;</span>;
+</span><span class='line'><span class="nb">echo</span> -e <span class="s2">&quot; -- \&quot;${CHRT_BASE}/usr\&quot; -- &quot;</span>;
+</span><span class='line'><span class="nb">echo</span> -e <span class="s2">&quot; -- \&quot;${CHRT_BASE}/usr/local\&quot; -- &quot;</span>;
+</span><span class='line'><span class="nb">echo</span> -e <span class="s2">&quot; -- \&quot;${CHRT_BASE}/usr/local/bin\&quot; -- &quot;</span>;
+</span><span class='line'><span class="nb">echo</span> -e <span class="s2">&quot; -- \&quot;${CHRT_BASE}/var\&quot; -- &quot;</span>;
+</span><span class='line'><span class="nb">echo</span> -e <span class="s2">&quot; -- \&quot;${CHRT_BASE}/var/spool\&quot; -- &quot;</span>;
+</span><span class='line'><span class="nb">echo</span> -e <span class="s2">&quot; -- \&quot;${CHRT_BASE}/etc\&quot; -- &quot;</span>;
+</span><span class='line'><span class="nb">echo</span> -e <span class="s2">&quot;\n&quot;</span>;
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'><span class="k">fi</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###  Now we will check to see if the user approves</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="nb">echo</span> -n <span class="s2">&quot;  Do you wish to proceed with the above changes [y/n] :&quot;</span>;
+</span><span class='line'><span class="nb">read </span>AGREE
+</span><span class='line'>  <span class="k">case</span> <span class="nv">$AGREE</span> in
+</span><span class='line'>    y|Y|yes|Yes|YES<span class="o">)</span> <span class="nb">echo</span> -e <span class="s2">&quot;\n  Here we go ... proceeding with setup\n&quot;</span>
+</span><span class='line'>     ;;
+</span><span class='line'>    n|N|no|No|NO<span class="o">)</span> <span class="nb">echo</span> -e <span class="s2">&quot;\n  Okay - We will quit now\n&quot;</span>
+</span><span class='line'>     <span class="nb">exit </span>0
+</span><span class='line'>     ;;
+</span><span class='line'>    *<span class="o">)</span> <span class="nb">echo</span> -e  <span class="s2">&quot;\n  `basename ${0}` : Unrecognized input\n&quot;</span> &gt;&amp;2
+</span><span class='line'>     <span class="nb">exit </span>1
+</span><span class='line'>     ;;
+</span><span class='line'>   <span class="k">esac</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###  We check below for a non null value for $CHRT_BASE and create the base chroot directories below</span>
+</span><span class='line'><span class="c">###    This is only done if you uncomment the CHRT_BASE=&quot;/home/`id -u`&quot; variable near the top </span>
+</span><span class='line'><span class="c">###    of this script. You can obviously change it to whatever is appropriate to your needs:w</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="k">if</span> <span class="o">[</span> ! -z <span class="k">${</span><span class="nv">CHRT_BASE</span><span class="k">}</span> <span class="o">]</span>; <span class="k">then</span>
+</span><span class='line'><span class="o">{</span>
+</span><span class='line'>   <span class="nb">echo</span> -e <span class="s2">&quot;\n -- Creating the chroot base directories -- &quot;</span>;
+</span><span class='line'>   <span class="nb">echo</span> -e <span class="s2">&quot; -- chroot base is \&quot;${CHRT_BASE}\&quot; -- \n&quot;</span>;
+</span><span class='line'>   check_create_and_log <span class="s2">&quot;${CHRT_BASE}/usr&quot;</span> <span class="s2">&quot;${OUT_LOG}&quot;</span>;
+</span><span class='line'>   check_create_and_log <span class="s2">&quot;${CHRT_BASE}/usr/local&quot;</span> <span class="s2">&quot;${OUT_LOG}&quot;</span>;
+</span><span class='line'>   check_create_and_log <span class="s2">&quot;${CHRT_BASE}/usr/local/bin&quot;</span> <span class="s2">&quot;${OUT_LOG}&quot;</span>;
+</span><span class='line'>   check_create_and_log <span class="s2">&quot;${CHRT_BASE}/var&quot;</span> <span class="s2">&quot;${OUT_LOG}&quot;</span>;
+</span><span class='line'>   check_create_and_log <span class="s2">&quot;${CHRT_BASE}/var/spool&quot;</span> <span class="s2">&quot;${OUT_LOG}&quot;</span>;
+</span><span class='line'>   check_create_and_log <span class="s2">&quot;${CHRT_BASE}/etc&quot;</span> <span class="s2">&quot;${OUT_LOG}&quot;</span>;
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'><span class="k">fi</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###   Now we create our common directories under $CHRT_BASE/usr/local/bin, $CHRT_BASE/var/spool, and $CHRT_BASE/etc</span>
+</span><span class='line'><span class="c">###   Remember - $CHRT_BASE is normally null</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="nb">echo</span> -e <span class="s2">&quot;\n -- Starting the creation of common directories -- \n&quot;</span>;
+</span><span class='line'>check_create_and_log <span class="s2">&quot;${INSTALL_DIR}&quot;</span> <span class="s2">&quot;${OUT_LOG}&quot;</span>;
+</span><span class='line'>check_create_and_log <span class="s2">&quot;${INSTALL_DIR}/bin&quot;</span> <span class="s2">&quot;${OUT_LOG}&quot;</span>;
+</span><span class='line'>check_create_and_log <span class="s2">&quot;${INSTALL_DIR}/lib&quot;</span> <span class="s2">&quot;${OUT_LOG}&quot;</span>;
+</span><span class='line'>check_create_and_log <span class="s2">&quot;${LOG_DIR}&quot;</span> <span class="s2">&quot;${OUT_LOG}&quot;</span>;
+</span><span class='line'>check_create_and_log <span class="s2">&quot;${LOG_DIR}/log&quot;</span> <span class="s2">&quot;${OUT_LOG}&quot;</span>;
+</span><span class='line'>check_create_and_log <span class="s2">&quot;${LOG_DIR}/data&quot;</span> <span class="s2">&quot;${OUT_LOG}&quot;</span>;
+</span><span class='line'>check_create_and_log <span class="s2">&quot;${LOG_DIR}/pid&quot;</span> <span class="s2">&quot;${OUT_LOG}&quot;</span>;
+</span><span class='line'>check_create_and_log <span class="s2">&quot;${CONF_DIR}&quot;</span> <span class="s2">&quot;${OUT_LOG}&quot;</span>;
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###   Now we create our user and group</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="nb">echo</span> -e <span class="s2">&quot;\n -- Adding user \&quot;${INSTALL_NAME}\&quot; with home directory \&quot;${LOG_DIR}\&quot; -- \n&quot;</span>;
+</span><span class='line'><span class="o">(</span>useradd -r -U -M -d <span class="k">${</span><span class="nv">LOG_DIR</span><span class="k">}</span> <span class="k">${</span><span class="nv">INSTALL_NAME</span><span class="k">}</span> 2&gt;&amp;1<span class="o">)</span>|tee -a <span class="k">${</span><span class="nv">OUT_LOG</span><span class="k">}</span>;
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="c">###  Now we set the permissions for our &quot;Config&quot; sub directories</span>
+</span><span class='line'><span class="c">###  so our program can write logs and data without running as root</span>
+</span><span class='line'><span class="c">###</span>
+</span><span class='line'><span class="nb">echo</span> -e <span class="s2">&quot;\n -- Changing ownership of directories under \</span>
+</span><span class='line'><span class="s2">\n -- \&quot;${LOG_DIR}\&quot; to \&quot;${INSTALL_NAME}.root\&quot; -- \n&quot;</span>;
+</span><span class='line'><span class="o">(</span>chown <span class="s2">&quot;${INSTALL_NAME}.root&quot;</span> <span class="s2">&quot;${LOG_DIR}/log&quot;</span> 2&gt;&amp;1<span class="o">)</span>|tee -a <span class="k">${</span><span class="nv">OUT_LOG</span><span class="k">}</span>;
+</span><span class='line'><span class="o">(</span>chown <span class="s2">&quot;${INSTALL_NAME}.root&quot;</span> <span class="s2">&quot;${LOG_DIR}/data&quot;</span> 2&gt;&amp;1<span class="o">)</span>|tee -a <span class="k">${</span><span class="nv">OUT_LOG</span><span class="k">}</span>;
+</span><span class='line'><span class="o">(</span>chown <span class="s2">&quot;${INSTALL_NAME}.root&quot;</span> <span class="s2">&quot;${LOG_DIR}/pid&quot;</span> 2&gt;&amp;1<span class="o">)</span>|tee -a <span class="k">${</span><span class="nv">OUT_LOG</span><span class="k">}</span>;
+</span><span class='line'><span class="nb">echo</span> -e <span class="s2">&quot;\n -- Success !!!, go have another cup of coffee. -- \n&quot;</span>;
+</span><span class='line'><span class="nb">exit </span>0
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>执行一下操作命令:</p>
+
+<pre><code>./prog_dir_setup.sh logstash  
+</code></pre>
+
+<p>脚本将会创建如下目录文件</p>
+
+<pre><code>create “/usr/local/bin/logstash” 
+#创建logstash文件执行目录
+create “bin” and “lib”
+create “/var/spool/logstash” 
+#创建logs, pid, and elasticsearch database文件存放目录
+create “log”, “pid” and “data”
+create “/etc/logstash” #创建logstash配置文件存放目录  
+</code></pre>
+
+<p>将下载的<code>logstash-XXX-monolithic.jar</code>文件拷贝到<code>/usr/local/bin/logstash</code>目录执行</p>
+
+<pre><code>cd /usr/local/bin/logstash
+ln -s logstash-XXX-monolithic.jar ./logstash.jar  
+</code></pre>
+
+<ul>
+<li>简单logstash 配置文件<br/>
+注意配置是类json格式文件。请参考如下简单配置:</li>
+</ul>
+
+
+<figure class='code'><figcaption><span>logstash.conf  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="err">input</span> <span class="p">{</span>
+</span><span class='line'>  <span class="err">file</span> <span class="err">{</span>
+</span><span class='line'>    <span class="err">type</span> <span class="err">=&gt;</span> <span class="nt">&quot;linux-syslog&quot;</span>
+</span><span class='line'>    <span class="err">path</span> <span class="err">=&gt;</span> <span class="p">[</span> <span class="s2">&quot;/var/log/messages&quot;</span> <span class="p">]</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="err">file</span> <span class="p">{</span>
+</span><span class='line'>   <span class="err">type</span> <span class="err">=&gt;</span> <span class="nt">&quot;apache-access&quot;</span>
+</span><span class='line'>   <span class="err">path</span> <span class="err">=&gt;</span> <span class="s2">&quot;/var/log/httpd/access_log&quot;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="err">file</span> <span class="p">{</span>
+</span><span class='line'>    <span class="err">type</span> <span class="err">=&gt;</span> <span class="nt">&quot;apache-error&quot;</span>
+</span><span class='line'>    <span class="err">path</span> <span class="err">=&gt;</span> <span class="s2">&quot;/var/log/httpd/error_log&quot;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'><span class="err">output</span> <span class="p">{</span>
+</span><span class='line'>  <span class="err">stdout</span> <span class="err">{</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="err">elasticsearch</span> <span class="p">{</span>
+</span><span class='line'>      <span class="err">embedded</span> <span class="err">=&gt;</span> <span class="err">true</span>
+</span><span class='line'>    <span class="err">host=&gt;</span><span class="nt">&quot;127.0.0.1&quot;</span>
+</span><span class='line'>    <span class="err">port=&gt;</span><span class="mi">9300</span>
+</span><span class='line'>    <span class="err">index=&gt;</span><span class="s2">&quot;graylog2&quot;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>将文件拷贝到<code>/etc/logstash</code>目录</p>
+
+<ul>
+<li>启动logstash服务
+到<code>/usr/local/bin/logstash/bin</code>目录，创建logstash.sh
+
+<pre><code>  /usr/bin/java -Des.path.data="/var/spool/logstash/data/" \
+  -jar "/usr/local/bin/logstash/logstash.jar" agent -vvv \
+  -f "/etc/logstash/mylogstash.conf" \
+  -l "/var/spool/logstash/log/logstash.log" \
+  -- web --backend elasticsearch://127.0.0.1/?local
+</code></pre>
+
+<p><code>chmod a+x logstash.sh</code>,and 启动</p></li>
+</ul>
+
+
+<h3>安装graylog2-server 和elasticsearch</h3>
+
+<ul>
+<li>下载安装 elasticsearch</li>
+</ul>
+
+
+<p>ElasticSearch是一个基于Lucene构建的开源，分布式，RESTful搜索引擎，设计用于云计算中，能够达到实时搜索，稳定，可靠，快速，安装使用方便.
+在其官网下载最新版本<a href="http://www.elasticsearch.org/download/">elasticsearch</a><br/>
+安装ElasticSearch非常简单，将其解压放到指定目录，</p>
+
+<pre><code>elasticsearch/bin/elasticsearch start
+ps -ef|grep elasticsearch #查看其状态
+</code></pre>
+
+<ul>
+<li>下载安装graylog2-server and graylog2-web<br/>
+  1 下载安装graylog2-server<br/>
+下载graylog2可在其官网<a href="http://graylog2.org">graylog2.org</a>或者<a href="https://github.com/Graylog2/graylog2-server">GitHub</a> 下载server包</li>
+</ul>
+
+
+<p>解压到指定目录</p>
+
+<pre><code>graylog2-server/bin/graylog2ctl start
+ps -ef|grep graylog2  
+</code></pre>
+
+<p>graylog2-server 的配置文件<code>graylog2.conf</code>可自定义配置</p>
+
+<p>2 下载安装graylog2-web<br/>
+<code>git clone git://github.com/Graylog2/graylog2-web-interface.git</code>下载到本地目录然后执行:</p>
+
+<pre><code>cd graylog2-web-interface
+bundle install
+rails s -e production -p 80  
+</code></pre>
+
+<p>然后访问http://ip地址，看到不一样的日志文件。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[不错的Category plugin 在Octopresss上使用]]></title>
